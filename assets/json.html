@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+	var data = {};
+	var bomen = [];
+	var namen = [];
+	var gebruiken = {
+		"Propedeuse TI 2012": "BSc TI jaar 1",
+		"Bachelor 2e jaar TI 2012": "BSc TI jaar 2",
+		"Bachelor 3e jaar TI 2012 verplicht deel": "BSc TI jaar 3",
+		
+		"Compulsory Courses ST 2012": "MSc CS track Software Technology",
+		"Track Software Technology 2012 ": "MSc CS track Software Technology",
+		"Specialisation part ST  2012": "MSc CS track Software Technology",
+		"Specialisation courses ST WIS 2012": "MSc CS track Software Technology",
+		"Specialisation courses ST SE 2012": "MSc CS track Software Technology",
+		"Specialisation courses ST PDS 2012": "MSc CS track Software Technology",
+		"Specialisation courses ST Alg 2012": "MSc CS track Software Technology",
+		
+		"Compulsory Courses CS-IA 2012": "MSc CS track Information Architecture",
+		"Compulsory Specialisation Part CS-IA (10 EC) 2012": "MSc CS track Information Architecture",
+		"Compulsory Specialisation Part SEPAM-IA (16 EC) 2012": "MSc CS track Information Architecture",
+		"Compulsory Seminar / Literature Survey (5 of 10 EC) 2012": "MSc CS track Information Architecture",
+		"Compulsory IA Design Project (6 EC) 2012": "MSc CS track Information Architecture",
+		"Track Information Architecture CS 2012": "MSc CS track Information Architecture",
+		
+		"Compulsory Courses CS-MKE 2012": "MSc CS track Media & Knowledge Engineering",
+		"Specialisation part CS-MKE 2012": "MSc CS track Media & Knowledge Engineering",
+		"Specialisation courses offered by CG 2012": "MSc CS track Media & Knowledge Engineering",
+		"Specialisation courses IIP 2012": "MSc CS track Media & Knowledge Engineering",
+		"Specialisation courses II 2012": "MSc CS track Media & Knowledge Engineering",
+		"Track Media and Knowledge Engineering 2012": "MSc CS track Media & Knowledge Engineering",
+		
+		"Compulsory Courses CS-BI 2012": "MSc CS track Bioinformatica",
+		"Specialization Courses CS-BI 2012": "MSc CS track Bioinformatica",
+		"CS Bioinformatics Homollogation 2012": "MSc CS track Bioinformatica",
+		"Track Bioinformatics 2012": "MSc CS track Bioinformatica",
+		
+		"keuzevakken P TW2012": "BSc TW jaar 1",
+		"Propedeuse TW 2012": "BSc TW jaar 1",
+		
+		"Gemeenschappelijk deel": "BSc TW jaar 2",
+		"Variantspecifiek deel (12 sp)": "BSc TW jaar 2",
+		"keuzevakken 2e jaar BSc TW2012": "BSc TW jaar 2",
+		
+		"Verplicht deel (24 sp)": "BSc TW jaar 3",
+		"keuzevakken 3e jaar BSc TW2012": "BSc TW jaar 3",
+
+		"Common courses AM 2012": "MSc Applied Mathematics",
+		"Orientation Courses AM 2012": "MSc Applied Mathematics",
+		"Specialisation Computational Science and Engineering AM 2011": "MSc Applied Mathematics",
+		"Specialisation Probabillity, Risk and Statistics AM 2012": "MSc Applied Mathematics",
+		"Master AM 2012": "MSc Applied Mathematics",
+	}, programs = {};
+	
+	$.getJSON('assets/opleidingenEWI.json', function(json){
+		data = json.getOpleidingenByFacultyAndYearResponse.opleiding;
+		explore(data);
+		console.log("fetched");
+	});
+	function explore(tree){
+		if(!tree) return;
+		if(tree.constructor.name == "Array"){
+			for(n in tree) explore(tree[n]);
+		} else {
+			console.log("Starting search at ",tree);
+			if(tree && tree['studieprogrammaboom']){
+				explore(tree['studieprogrammaboom'].studieprogramma);
+			}
+			if(tree && tree.vak){
+				if(tree.programmacode in gebruiken){
+					var a = programs[gebruiken[tree.programmacode]] = programs[gebruiken[tree.programmacode]] || [];
+					a.push.apply(a, tree.vak);
+				}
+			}
+		}
+	}
+	</script>
+</body>
+</html>
