@@ -23,27 +23,31 @@ class Controller_Docenten extends Controller_Website {
 	
 	public function action_scores(){
 		$this->template->content = View::factory("scores");
-		$this->template->content->bind("scores", $scores);
+		$this->template->content->bind("studies", $studies);
+    View::set_global('container_style', '-fluid');
 		
 		$query = DB::select(
 			"nominee", 
 			array(DB::expr("AVG(vote)"), "score"), 
 			array(DB::expr("COUNT(vote)"), "amount")
 		)->from('votes')
+				->where("study", "=", ":study")
+				->join('students')->on("votes.student", "=", "students.id")
 				->group_by('nominee')
 					->order_by('score', 'DESC')
 					->order_by('amount', 'DESC')
-						->limit(11)
+						->limit(3)
 							->as_object();
-		$results = $query->execute();
 		
-		$scores = array();
-		foreach($results as $row){
-			$scores[] = array(
-				ORM::factory('Nominee', $row->nominee), $row->score, $row->amount
-			);
+		$studies = array("TW" => array(), "TI" => array(), );
+		foreach($studies as $name => $val){
+			$results = $query->parameters(array(":study"=>$name))->execute();
+			foreach($results as $row){
+				$studies[$name][] = array(
+					ORM::factory('Nominee', $row->nominee), $row->score, $row->amount
+				);
+			}
 		}
-		
 	}
 	
 	public function _action_import()

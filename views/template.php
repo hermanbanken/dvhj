@@ -26,7 +26,7 @@
 
   <body class="<?php echo Request::current()->controller()." ".Request::current()->controller()."-".Request::current()->action(); ?>">
 
-    <div class="container-narrow">
+    <div class="container<?php echo $container_style ?>">
 
       <?php echo $menu; ?>
 

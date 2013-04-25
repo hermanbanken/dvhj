@@ -95,7 +95,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/~hermanb/apps/dvhj',
+	'base_url'   => '/dvhj',
 	'index_file' => ''
 ));
 
@@ -119,6 +119,7 @@ Kohana::modules(array(
 	 'database'   => MODPATH.'database',   // Database access
 	 'image'      => MODPATH.'image',      // Image manipulation
 	 'imagefly'   => MODPATH.'imagefly',      // Image manipulation
+	 'email' => MODPATH.'kohana-email',	// Swiftmailer
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing

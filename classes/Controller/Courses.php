@@ -23,9 +23,15 @@ class Controller_Courses extends Controller {
 	}
 	
 	public function action_byname(){
-		$l = '%'.$this->request->param('id').'%';
-		$p = ORM::factory("Course")->where('code', 'like', $l)->or_where('name', 'like', $l)->find_all();
-		$this->output($p->as_array());
+		$i = $this->request->param('id');
+		if(strpos($i, " | ")){
+			$p = explode(" | ", $i);
+			$c = ORM::factory("Course")->where('code', 'like', $p[0])->find_all();
+		} else {
+			$l = '%'.$this->request->param('id').'%';
+			$c = ORM::factory("Course")->where('code', 'like', $l)->or_where('name', 'like', $l)->find_all();			
+		}
+		$this->output($c->as_array());
 	}
 	public function action_byteacher(){
 		$l = '%'.$this->request->param('id').'%';
@@ -34,7 +40,7 @@ class Controller_Courses extends Controller {
 		foreach($p as $n){
 			$cs = $n->courses->find_all();
 			foreach($cs as $c){
-				$list[] = $n->name . " | " . $c->name;
+				$list[] = $n->name . " | " . $c->code . " | " . $c->name;
 			}
 		}
 		$list = array_unique($list);

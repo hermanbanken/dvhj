@@ -34,11 +34,17 @@ class Controller_Student extends Controller {
 			$all_success = true;
 			
 			foreach($grades as $tutorId => $grade){
-				if(!isset($grade) || empty($grade)) continue;
 				$tutor = ORM::factory("Nominee", $tutorId);
+				$vote = ORM::factory("Vote")->where("student", "=", $this->user->id)->and_where("nominee", "=", $tutor->id)->find();
+				
+				// Delete if vote was empty
+				if(!isset($grade) || empty($grade)){
+					if($vote->loaded()) $vote->delete();
+					continue;
+				} 
+				
 				$motivation = isset($motivations[$tutorId]) ? $motivations[$tutorId] : null;
 				
-				$vote = ORM::factory("Vote")->where("student", "=", $this->user->id)->and_where("nominee", "=", $tutor->id)->find();
 				if(!$vote->loaded()){
 					$vote->set('student', $this->user)->set('nominee', $tutor);
 				}

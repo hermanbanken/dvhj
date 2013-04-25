@@ -1,7 +1,7 @@
 $(function(){
 	$("#new-course").typeahead({ source: function(query, callback){
 		$.getJSON(root_url+"Courses/byname/"+query, function(courses){
-			callback(courses.map(function(c){ return c.name; }));
+			callback(courses.map(function(c){ return c.code + " | " + c.name; }));
 		});
 	} });
 	
@@ -51,6 +51,7 @@ $(function(){
 		});
 		ids = Array.prototype.slice.call(ids);
 		
+		updatePills(ids);
 		updateTutors(ids);
 		updateBar();
 		
@@ -66,37 +67,61 @@ $(function(){
 	}
 	update(false);
 	
+	function updatePills(ids){
+		// Make fast index
+		var key_ids = {};
+		for(var i = ids.length; i--;){
+			key_ids[ids[i]] = true;
+		}
+		console.log(key_ids);
+		$(".tutor .badge").each(function(){
+			$(this).toggleClass("badge-info", $(this).attr("data-id") in key_ids);
+		});
+	}
+	
 	function updateTutors(ids){
 		// Hide and show teachers
 		if(ids.length == 0) {
 			$(".visible-tutors .tutor").hide();
+			$("table#courses-visible tfoot").show();
 		} else {
 			$(".visible-tutors .tutor").filter(".course-"+ids.join(",.course-")).show();
 			$(".visible-tutors .tutor").filter(":not(.course-"+ids.join(",.course-")+")").hide();
+			$("table#courses-visible tfoot").hide();
 		}
 	}
 	
 	function updateBar(){
 		var total = 0, done = 0;
-		$(".tutor:visible").each(function(){
+		$(".tutor:visible:not(.disabled)").each(function(){
 			total++;
 			
 			var grade = $(this).find(".grade:not(.placeholdersjs)").val();
-			if(grade && parseFloat(grade) >= 8 && $(this).find("textarea:not(.placeholdersjs)").val().length > 5)
+			if(grade && parseFloat(grade) >= 8 && $(this).find("textarea:not(.placeholdersjs)").val().length > 3)
 				done++;
 			else if(grade && parseFloat(grade) < 8)
 				done++;
 		});
 		
-		$(".progress .bar").css("width", ~~(done/total*100)+"%");
+		var per = ~~(done/total*100);
+		$("form#form-votes input[type=submit]").toggleClass("btn-success", per > 0);
+		$(".progress .bar").css("width", per+"%");
 	}
 	
 	// Remove row if deleted
-	$("table#courses-visible").on("click", ".delete", function(){
+	$("table#courses-visible").on("click", ".delete", function(event){
 		$(this).parents("tr").hide(function(){ 
 			$(this).remove();
 			update();
 		});
+
+		event.preventDefault();
+		return false;
+	});
+	
+	$("form#form-votes .tutor").on("click", ".disable", function(){
+		$(this).parents(".tutor").toggleClass("disabled");
+		updateBar();
 	});
 	
 	var isdirty = false;
@@ -113,6 +138,7 @@ $(function(){
 	function saveVotes(event){
 		$.post(root_url+"Student/votes", $("form#form-votes").serialize(), function(){
 			dirty(false);
+			$('#save-confirm').modal('show');
 		});
 		
 		// Prevent normal submit
@@ -137,14 +163,14 @@ $(function(){
 					
 					// If teacher-search: filter tutor from query and lookup course
 					if(sel == ".course-finder-teacher" && val.indexOf(" | ") >= 0){
-						val = val.split(" | ")[1];
-						source = root_url+"Courses/byname/"+val;
+						val = val.split(" | ");
+						source = root_url+"Courses/byname/"+val[1]+" | "+val[2];
 					}
 					
 					$(sel).find("button").attr("disabled","1");
 					$.getJSON(source, addCourses).always(function(){
-						$(sel).find("input, select").val("");
 						$(sel).find("button").removeAttr("disabled");
+						$(sel).find("input, select").val("").trigger("change");
 					});
 				})(sel, val);
 			}
@@ -152,11 +178,17 @@ $(function(){
 		
 		event.preventDefault();
 		return false;
-	}).on("reset", resetCourses);
+	}).on("reset", function(){ $('#reset-confirm').modal('hide'); resetCourses(); });
 	
 	$("[data-toggle='tooltip']").tooltip();
 	
 	$("body").on("keyup change", "input.grade, textarea", function(){ updateBar(); dirty(true); });
+	$("form#form-selected-courses").on("keyup change", "select, input", function(){
+		if($(this).val() == "")
+			$(this).nextAll("button").first().attr("disabled", true);
+		else
+			$(this).nextAll("button").first().removeAttr("disabled");
+	}).find("select, input").trigger("change");
 	
 	$("input.grade").on("keyup", function(event){
     var val = this.value;
@@ -221,6 +253,15 @@ $(function(){
 		} 
 	});
 	$(window).hashchange();
+	
+	setTimeout(function () {
+		var top = ($('.affixed').offset() || {top: 465}).top;
+    $('.affixed').affix({
+      offset: {
+        top: function () { return top; }
+      }
+    })
+  }, 100);
 });
 function transformTypedChar(charStr, e) {
     return e.which == 188 ? "." : charStr;

@@ -13,6 +13,7 @@ class Auth {
 		$user = ORM::factory('Student')->where('token', '=', $token)->find();
 		if($user->loaded()){
 			Session::instance()->set('student_token', $token);
+			$user->dirty()->update();
 			return true;
 		}
 		return false;

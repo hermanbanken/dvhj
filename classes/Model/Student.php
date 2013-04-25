@@ -14,4 +14,13 @@ class Model_Student extends ORM
 						'foreign_key'	=> 'student_id',
 				),
 		);
+		
+		public function has_voted(){
+			return $this->votes->count_all() > 0;
+		}
+		
+		public function dirty(){
+			$this->_changed['lastLogin'] = 'lastLogin';
+			return $this->set('lastLogin', null);
+		}
 }
