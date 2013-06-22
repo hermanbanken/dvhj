@@ -1,7 +1,7 @@
 <p><strong>For English, scroll down.</strong></p>
 <p>Beste student,</p>
 
-<p>De jaarlijkse "Docent van het jaar"-verkiezing vindt weer plaats. Uit je
+<p>Je hebt nog niet gestemd voor de jaarlijkse "Docent van het jaar"-verkiezing. Uit je
 waardering voor het harde werk van je docenten en geef ze een cijfer.</p>
 
 <p>Via onderstaande link kun je aangeven welke vakken je gevolgd hebt en de
@@ -31,7 +31,7 @@ der W.I.S.V. 'Christiaan Huygens'<br />
 <p><strong>English:</strong></p>
 <p>Dear student,</p>
 
-<p>It's time for the yearly "Teacher of the Year"-election. Show your teachers your appreciation for their hard work and give them a grade.</p>
+<p>You haven't voted yet for the yearly "Teacher of the Year"-election. Show your teachers your appreciation for their hard work and give them a grade.</p>
 
 <p>Using the personal link below you can select the courses you followed and give the matching teachers a grade. Please do this before the 20th of May, since the election will close on 2013-05-19 23:59.</p>
 

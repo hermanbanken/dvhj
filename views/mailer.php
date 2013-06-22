@@ -6,9 +6,9 @@
 	<?php endif; ?>
 	
 	<?php if(isset($students)): foreach($students as $student): ?>
-		<div class='well'><?php include 'template/mail.php'; ?></div>
+		<div class='well'><?php include 'template/'.Request::current()->action().'.php'; ?></div>
 	<?php endforeach; else: ?>
-		<div class='well'><?php include 'template/mail.php'; ?></div>
+		<div class='well'><?php include 'template/'.Request::current()->action().'.php'; ?></div>
 	<?php endif; ?>
   <div class="control-group">
     <div class="controls">

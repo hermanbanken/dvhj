@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php echo $page_title; ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=580, initial-scale=1.0">
     <meta name="description" content="Kies de beste docent van het jaar!">
     <meta name="author" content="Herman Banken">
 
@@ -25,8 +25,10 @@
   </head>
 
   <body class="<?php echo Request::current()->controller()." ".Request::current()->controller()."-".Request::current()->action(); ?>">
-
-    <div class="container<?php echo $container_style ?>">
+		
+		<div class="visible-phone alert warning"><p><?php echo __("Deze website is niet volledig geoptimaliseerd voor mobiel gebruik. Stem bij voorkeur op een desktop/laptop."); ?></p></div>
+    
+		<div class="container<?php echo $container_style ?>">
 
       <?php echo $menu; ?>
 
@@ -52,4 +54,17 @@
     <script src="<?php echo URL::site("assets/js/Placeholders.min.js") ?>"></script>
 
   </body>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-3854592-12']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
 </html>

@@ -30,7 +30,6 @@ body {
 	width: auto;
 }
 
-/* Supporting marketing content */
 .marketing {
   margin: 60px 0;
 }
@@ -38,6 +37,13 @@ body {
   margin-top: 28px;
 }
 
+ul.nav li img.language-icon {
+	display: inline-block;
+	padding-top: 2px;
+	vertical-align: top;
+}
+
+/* Custom DVHJ */
 .row-fluid.courses {
 	background-image: url(../img/arrows.png);
 	background-position: 312px 20px;
@@ -53,6 +59,18 @@ body {
 @media (max-width: 767px) {
 	#form-votes div.affixed.affix { width: 100%; min-width: auto; left: 0; padding-bottom: 10px; }
 	#form-votes div.affixed.affix > * { margin-left: 10px; margin-right: 10px; width: auto; }
+	.visible-tutors {
+		margin-top: 20px;
+	}
+	.visible-phone.alert { margin-top: 20px; }
+	.tutor textarea { width: 150px; }
+}
+@media (max-width: 480px) {
+	.tutor.media .pull-right { margin-left: 0; }
+	.tutur.media a.pull-right.motivation { width: auto; left: 105px; position: absolute !important; right: 20px; }
+	.tutor.media .pull-left { display: inline-block; }
+	.tutor.media .media-body.visible-phone { display: inline-block !important; vertical-align: top; }
+	.tutor.media textarea { display: block; width: 100%; height: 74px; box-sizing: border-box; }
 }
 
 .progress .bar { height: 30px; }
@@ -129,11 +147,11 @@ table#courses-visible tfoot { display: none; }
 table#courses-visible tfoot td { text-align: center; }
 
 /* Scores page */
-.Docenten-scores .row-fluid { margin-bottom: 20px; }
-.Docenten-scores hr + .row-fluid { margin-bottom: 30px; }
+.Result-scores .row-fluid { margin-bottom: 20px; }
+.Result-scores hr + .row-fluid { margin-bottom: 30px; }
 
-.Docenten-scores .tutor { position: relative; }
-.Docenten-scores .tutor .name {
+.Result-scores .tutor { position: relative; }
+.Result-scores .tutor .name {
 	background: #333;
 	color: white;
 	padding: 5px 50px 5px 8px;
@@ -143,7 +161,7 @@ table#courses-visible tfoot td { text-align: center; }
 	white-space: nowrap;
 	overflow: hidden;
 }
-.Docenten-scores .tutor .score { 
+.Result-scores .tutor .score { 
 	position: absolute; 
 	bottom: -20px; 
 	right: -25px; 
@@ -158,15 +176,15 @@ table#courses-visible tfoot td { text-align: center; }
 	text-shadow: 0 0 5px #000;
 	-webkit-transition: bottom .3s ease;
 }
-.Docenten-scores .tutor .score:hover { bottom: -18px; }
-.Docenten-scores .tutor.score-1 .score {
+.Result-scores .tutor .score:hover { bottom: -18px; }
+.Result-scores .tutor.score-1 .score {
 	background-position: 0px -6px;
 	height: 138px;
 	width: 150px;
 	line-height: 120px;
 	font-size: 2.5em;
 }
-.Docenten-scores .tutor.score-2 .score {
+.Result-scores .tutor.score-2 .score {
 	background-position: -160px -15px;
 	height: 120px;
 	width: 130px;
@@ -175,7 +193,7 @@ table#courses-visible tfoot td { text-align: center; }
 	color: black;
 	text-shadow: none;
 }
-.Docenten-scores .tutor.score-3 .score {
+.Result-scores .tutor.score-3 .score {
 	background-position: -315px -20px;
 	height: 110px; 
 	width: 120px;
@@ -183,10 +201,10 @@ table#courses-visible tfoot td { text-align: center; }
 	font-size: 2em;
 }
 
-.Docenten-scores .half-TW .tutor .score { right: auto; left: -25px; }
-.Docenten-scores .half-TW h2 { text-align: right; }
+.Result-scores .half-TW .tutor .score { right: auto; left: -25px; }
+.Result-scores .half-TW h2 { text-align: right; }
 
-.Docenten-scores .tutor .name .badge {
+.Result-scores .tutor .name .badge {
 	float: right;
 	position: absolute;
 	top: 5px;

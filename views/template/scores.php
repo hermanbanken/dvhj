@@ -19,7 +19,7 @@ function score($name, $i){
 	return $i;
 }}
 
-foreach($rows as $row): ?>
+foreach($rows as $row): if(count($scores) > 0): ?>
 <div class="row-fluid">
 	<?php foreach($row as $col): if(count($scores) > 0): ?>
 		<div class="span<?php echo $col; ?>">
@@ -42,9 +42,9 @@ foreach($rows as $row): ?>
 						<?php echo $amount; ?></span>
 				</span>
 				<img src="<?php echo $img; ?>" style="width: 100%;" />
-				<div class="score"><?php echo number_format($score, 0); ?></div>
+				<div class="score"><?php echo number_format($score, 1); ?></div>
 			</div>
 		</div>
 	<?php endif; endforeach; ?>
 </div>
-<?php endforeach; ?>
+<?php endif; endforeach; ?>

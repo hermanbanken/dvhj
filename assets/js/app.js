@@ -73,7 +73,7 @@ $(function(){
 		for(var i = ids.length; i--;){
 			key_ids[ids[i]] = true;
 		}
-		console.log(key_ids);
+		if(console) console.log(key_ids);
 		$(".tutor .badge").each(function(){
 			$(this).toggleClass("badge-info", $(this).attr("data-id") in key_ids);
 		});
@@ -140,6 +140,16 @@ $(function(){
 			dirty(false);
 			$('#save-confirm').modal('show');
 		});
+		var stats = $(".tutor").get().map(function(item){
+			if($(item).is(":visible") && $(item).find(".grade").val())
+				return [
+					'_trackEvent',
+					'vote',
+					$(item).find("h4").first().text(),
+					$(item).find(".grade").val()
+				];
+		}).filter(function(item){ return item; });
+		if(_gaq) _gaq.push.apply(_gaq, stats);
 		
 		// Prevent normal submit
 		event.preventDefault();
