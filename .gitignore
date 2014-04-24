@@ -1,3 +1,4 @@
 uploads/*
 logs/*
 cache/*
+config/database.php
