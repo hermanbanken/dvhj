@@ -1,5 +1,5 @@
 <?php
-define("CLOSES_ON", strtotime("24 May 2013 16:59:59"));
+define("CLOSES_ON", strtotime("10 June 2014 16:57:57"));
 
 abstract class Controller_Website extends Controller_Template {
  

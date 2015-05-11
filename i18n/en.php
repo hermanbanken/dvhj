@@ -70,7 +70,7 @@ return array
 	// Dialog
 	"Uw stem is ontvangen" => "Your vote has been received",
 	"Uw stem is ontvangen. Mocht u deze nog willen uitbreiden/aanpassen dan kan dit nog tot de stemmen sluiten." => 
-		"Your vote has been received. If you wan't to change it, you can do this until the end of the election.",
+		"Your vote has been received. If you want to change it, you can do this until the end of the election.",
 	"Aanpassen" => "Adjust vote",
 	
 	"ranking_expl" => 'The ranking is based on a smart ranking system applying Bayes\' Theorem to the Ranking Problem. More details can be found at a website<sup><a href="#refs">[1]</a></sup> describing how to implment this algorithm.'

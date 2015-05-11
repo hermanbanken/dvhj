@@ -30,7 +30,7 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Docent van het jaar 2013')
+		$message = Swift_Message::newInstance('Docent van het jaar 2014')
 		  ->setFrom(array('coi@ch.tudelft.nl' => 'Commissaris Onderwijs Informatica'));
 
 		// Send the message
@@ -39,7 +39,7 @@ class Controller_Default extends Controller_Website {
 		
 		//$students = ORM::factory('Student')->where('test', '=', 1)->find_all();
 		$offset = 0;
-		$students = ORM::factory('Student')->where('id', '>', 679)->limit(1000)->offset($offset)->find_all();
+		$students = ORM::factory('Student')->limit(1000)->offset($offset)->find_all();
 
 		foreach ($students as $student)
 		{
@@ -54,7 +54,7 @@ class Controller_Default extends Controller_Website {
 		}
 		
 		$error = count($failedRecipients) ? " Failed sending mails for ". implode(", ", $failedRecipients) : "";
-		$this->template->content->set('message', sprintf("Sent %d messages from $offset till ".($offset+100).".\n", $numSent).$error);
+		$this->template->content->set('message', sprintf("Sent %d messages from offset $offset.\n", $numSent).$error);
 	}
 	
 	public function action_remind(){
@@ -79,7 +79,7 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Nog 2 dagen stemmen op jouw Docent van het jaar 2013')
+		$message = Swift_Message::newInstance('Nog 2 dagen stemmen op jouw Docent van het jaar 2014')
 		  ->setFrom(array('coi@ch.tudelft.nl' => 'Commissaris Onderwijs Informatica'));
 
 		// Send the message
@@ -119,10 +119,10 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Docent van het jaar 2013')
+		$message = Swift_Message::newInstance('Docent van het jaar 2014')
 		  ->setFrom(array('website@ch.tudelft.nl' => 'Website DVHJ'));
 		
-	 	$message->setTo(array("coi@ch.tudelft.nl" => "Herman Banken"));
+	 	$message->setTo(array("coi@ch.tudelft.nl" => "Jan-Willem Manenschijn"));
 		$view = "<p>Vanaf ".$_SERVER['REMOTE_ADDR']." is een verzoek geplaatst voor het mail adres ".$mail."</p>";
 		$message->setBody($view, 'text/html');
 	  $mailer->send($message, $failedRecipients);
