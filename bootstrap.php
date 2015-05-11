@@ -117,6 +117,7 @@ Kohana::modules(array(
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'database'   => MODPATH.'database',   // Database access
+	 'mysqli'     => MODPATH.'mysqli',   // Database access
 	 'image'      => MODPATH.'image',      // Image manipulation
 	 'imagefly'   => MODPATH.'imagefly',      // Image manipulation
 	 'email' => MODPATH.'kohana-email',	// Swiftmailer
