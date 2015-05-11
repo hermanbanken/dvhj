@@ -5,7 +5,7 @@
 waardering voor het harde werk van je docenten en geef ze een cijfer.</p>
 
 <p>Via onderstaande link kun je aangeven welke vakken je gevolgd hebt en de
-bijbehorende docenten een cijfer geven. Doe dit a.u.b. voor 19 mei 23:59 uur, want
+bijbehorende docenten een cijfer geven. Doe dit a.u.b. voor <?php echo $closesOnHumanDutch; ?>, want
 dan sluit de verkiezing.</p>
 
 <?php
@@ -17,7 +17,7 @@ $url = URL::site(
 
 <p>Met vriendelijke groet,</p>
 
-<p>Herman Banken</p>
+<p><?php echo $sender; ?></p>
 
 <p>Commissaris Onderwijs Informatica<br />
 der W.I.S.V. 'Christiaan Huygens'<br />
@@ -33,7 +33,7 @@ der W.I.S.V. 'Christiaan Huygens'<br />
 
 <p>You haven't voted yet for the yearly "Teacher of the Year"-election. Show your teachers your appreciation for their hard work and give them a grade.</p>
 
-<p>Using the personal link below you can select the courses you followed and give the matching teachers a grade. Please do this before the 20th of May, since the election will close on 2013-05-19 23:59.</p>
+<p>Using the personal link below you can select the courses you followed and give the matching teachers a grade. Please do this before <?php echo $closesOnHumanEng; ?>, since that is when the election will close.</p>
 
 <?php
 $url = URL::site(
@@ -44,7 +44,7 @@ $url = URL::site(
 
 <p>Kind regards,</p>
 
-<p>Herman Banken</p>
+<p><?php echo $sender; ?></p>
 
 <p>Chief Commissioner of Computer Science Education<br />
 of W.I.S.V. 'Christiaan Huygens'<br />

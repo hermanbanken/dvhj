@@ -12,6 +12,8 @@ class Controller_Default extends Controller_Website {
 		// Only if logged in
 		//if(!Auth::instance()->logged_in())
 		HTTP::redirect("#login");
+
+		$config = Kohana::$config->load('email');
 		
 		$this->user = Auth::instance()->get_user();
 		$this->template->content = View::factory("mailer")->bind('student', $this->user);
@@ -30,8 +32,8 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Docent van het jaar 2014')
-		  ->setFrom(array('coi@ch.tudelft.nl' => 'Commissaris Onderwijs Informatica'));
+		$message = Swift_Message::newInstance('Docent van het jaar '.date("Y"))
+		  ->setFrom($config['sender']);
 
 		// Send the message
 		$failedRecipients = array();
@@ -79,8 +81,8 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Nog 2 dagen stemmen op jouw Docent van het jaar 2014')
-		  ->setFrom(array('coi@ch.tudelft.nl' => 'Commissaris Onderwijs Informatica'));
+		$message = Swift_Message::newInstance('Nog 2 dagen stemmen op jouw Docent van het jaar '.date("Y"))
+		  ->setFrom($config['sender']);
 
 		// Send the message
 		$failedRecipients = array();
@@ -119,10 +121,10 @@ class Controller_Default extends Controller_Website {
 		$mailer = Swift_Mailer::newInstance($transport);
 		
 		// Create a message
-		$message = Swift_Message::newInstance('Docent van het jaar 2014')
+		$message = Swift_Message::newInstance('Docent van het jaar '.date("Y"))
 		  ->setFrom(array('website@ch.tudelft.nl' => 'Website DVHJ'));
 		
-	 	$message->setTo(array("coi@ch.tudelft.nl" => "Jan-Willem Manenschijn"));
+	 	$message->setTo($config['sender']);
 		$view = "<p>Vanaf ".$_SERVER['REMOTE_ADDR']." is een verzoek geplaatst voor het mail adres ".$mail."</p>";
 		$message->setBody($view, 'text/html');
 	  $mailer->send($message, $failedRecipients);
