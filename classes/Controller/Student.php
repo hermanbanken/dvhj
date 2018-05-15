@@ -33,7 +33,9 @@ class Controller_Student extends Controller {
 			$results = array();
 			$all_success = true;
 			
+			
 			foreach($grades as $tutorId => $grade){
+				
 				$tutor = ORM::factory("Nominee", $tutorId);
 				$vote = ORM::factory("Vote")->where("student", "=", $this->user->id)->and_where("nominee", "=", $tutor->id)->find();
 				
@@ -48,7 +50,8 @@ class Controller_Student extends Controller {
 				if(!$vote->loaded()){
 					$vote->set('student', $this->user)->set('nominee', $tutor);
 				}
-				$vote->set('vote', min(10, max(1,$grade)))->set('why', $motivation);
+				
+				$vote->set('vote', min(10, max(1,floatval($grade))))->set('why', $motivation);
 				
 				if($vote->save()){
 					$results[$tutorId] = 'success';

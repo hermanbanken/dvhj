@@ -39,20 +39,21 @@ class Controller_Default extends Controller_Website {
 		$failedRecipients = array();
 		$numSent = 0;
 		
-		//$students = ORM::factory('Student')->where('test', '=', 1)->find_all();
+		$students = ORM::factory('Student')->where('test', '=', 1)->find_all();
 		$offset = 0;
-		$students = ORM::factory('Student')->limit(1000)->offset($offset)->find_all();
+		//$students = ORM::factory('Student')->limit(1000)->offset($offset)->find_all();
 
 		foreach ($students as $student)
-		{
+		{	
+		
 			if (!$student->mail) continue;
 			
-		 	$message->setTo(array($student->mail => $student->name));
-			$view = View::factory("template/mail")->set('student', $student);
-			$message->setBody($view, 'text/html');
+		 	//$message->setTo(array($student->mail => $student->name));
+		//	$view = View::factory("template/mail")->set('student', $student);
+			//$message->setBody($view, 'text/html');
 		  
-			echo $student->mail . "\n";flush();
-		  $numSent += $mailer->send($message, $failedRecipients);
+			//echo $student->mail . "\n";flush();
+		  //$numSent += $mailer->send($message, $failedRecipients);
 		}
 		
 		$error = count($failedRecipients) ? " Failed sending mails for ". implode(", ", $failedRecipients) : "";
@@ -111,7 +112,9 @@ class Controller_Default extends Controller_Website {
 	public function action_resend(){
 		
 		// Load classes
-		require MODPATH.'kohana-email/vendor/swift/swift_required.php';
+		require MODPATH.'kohana-email/vendor/swiftmailer/lib/swift_required.php';
+		
+		$config = Kohana::$config->load('email');
 		
 		$mail = $this->request->post("mail");
 		
