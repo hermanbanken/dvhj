@@ -25,6 +25,6 @@ return array(
 	 * @param   string  sendmail: executable path, with -bs or equivalent attached
 	 * @param   array   smtp: hostname, (username), (password), (port), (encryption)
 	 */
-	'options' => array( 'smtp-a.tudelft.nl', 'fverburg' ),
-	'sender'  => array( 'coi@ch.tudelft.nl' => 'Floris Verburg, Commissaris Onderwijs Informatica'),
+	'options' => array( 'smtp-a.tudelft.nl', 'tharting', 'Wolf1995@' ),
+	'sender'  => array( 'coi@ch.tudelft.nl' => 'Tom Harting, Commissaris Onderwijs Informatica'),
 );

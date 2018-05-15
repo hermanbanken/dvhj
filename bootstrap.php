@@ -3,7 +3,7 @@
 // -- Environment setup --------------------------------------------------------
 
 // Load the core Kohana class
-require SYSPATH.'classes/Kohana/Core'.EXT;
+require SYSPATH.'classes/Kohana/Core'.EXT; 
 
 if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
@@ -66,7 +66,7 @@ I18n::lang('en-us');
 /**
  * Set cookie salt
  */
-Cookie::$salt = 'dvhj2013_huray!';
+Cookie::$salt = 'dvhj2017_huray!';
 
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
